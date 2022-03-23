@@ -80,8 +80,8 @@ export const giveRaise = (raise: number) => {
 // register('alice008', 'alice234', 'alice234@gmail.com')
 //   .then(user => console.log(user))
 //
-login('alice008', 'alice234')
-  .then(user => console.log(user))
+// login('alice008', 'alice234')
+//   .then(user => console.log(user))
 
 // userDao.findAllUsers()
 //   .then(users => console.log(users));

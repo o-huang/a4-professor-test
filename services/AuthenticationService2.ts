@@ -47,9 +47,9 @@ export const initializeSalaries = async (salary: number) => {
   return values;
 }
 
-register('alice678', 'alice234', 'alice234@gmail.com')
+// register('alice678', 'alice234', 'alice234@gmail.com')
 
-login('alice678', 'alice234')
+// login('alice678', 'alice234')
 // login('alice', 'alice123')
 
 // userDao.findAllUsers()
