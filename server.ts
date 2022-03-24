@@ -33,11 +33,12 @@ const DB_QUERY = "retryWrites=true&w=majority";
 const connectionString = `${PROTOCOL}://${DB_USERNAME}:${DB_PASSWORD}@${HOST}/${DB_NAME}?${DB_QUERY}`;// connect to the database
 // mongoose.connect(connectionString);
 mongoose.connect("mongodb+srv://frostyfeet1998:cs5500password@cluster0.x1wvq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
+
 const app = express();
-app.use(express.json());
+
 app.use(cors({
     credentials: true,
-    origin: ["http://localhost:3000", 'https://golden-toffee-9c242b.netlify.app/']
+    origin: ["http://localhost:3000", 'https://golden-toffee-9c242b.netlify.app']
 }));
 
 const SECRET = 'process.env.SECRET';
@@ -56,6 +57,7 @@ if (process.env.ENVIRONMENT === 'PRODUCTION') {
 }
 
 app.use(session(sess))
+app.use(express.json());
 
 app.get('/', (req: Request, res: Response) =>
     res.send('Welcome!'));
