@@ -13,7 +13,7 @@ const connectionString = `${PROTOCOL}://${DB_USERNAME}:${DB_PASSWORD}@${HOST}/${
 // connect to the database
 // mongoose.connect(connectionString);
 
-mongoose.connect("mongodb+srv://frostyfeet1998:cs5500password@cluster0.erteh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
+mongoose.connect("mongodb+srv://frostyfeet1998:cs5500password@cluster0.x1wvq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
 export const login = (u: string, p: string) =>
   userDao.findUserByCredentials(u, p)
     .then(user => {

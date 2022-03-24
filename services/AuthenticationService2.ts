@@ -12,7 +12,7 @@ const DB_QUERY = "retryWrites=true&w=majority";
 const connectionString = `${PROTOCOL}://${DB_USERNAME}:${DB_PASSWORD}@${HOST}/${DB_NAME}?${DB_QUERY}`;
 // connect to the database
 // mongoose.connect(connectionString);
-mongoose.connect("mongodb+srv://frostyfeet1998:cs5500password@cluster0.erteh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
+mongoose.connect("mongodb+srv://frostyfeet1998:cs5500password@cluster0.x1wvq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
 
 export const login = async (u: string, p: string) => {
   try {
@@ -32,7 +32,7 @@ export const register = async (u: string, p: string, e: string) => {
     if (user) {
       throw 'User already exists';
     }
-    const newUser = await userDao.createUser({username: u, password: p, email: e});
+    const newUser = await userDao.createUser({ username: u, password: p, email: e });
     return newUser;
   } catch (e) {
     return e;
