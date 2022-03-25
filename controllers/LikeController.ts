@@ -4,7 +4,6 @@
 import { Express, Request, Response } from "express";
 import LikeDao from "../daos/LikeDao";
 import LikeControllerI from "../interfaces/LikeControllerI";
-import DislikeController from "./DislikeController";
 import TuitDao from "../daos/TuitDao";
 import { ParamsDictionary } from "express-serve-static-core";
 import { ParsedQs } from "qs";
