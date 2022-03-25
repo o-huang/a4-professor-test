@@ -30,7 +30,6 @@ import { ParsedQs } from "qs";
 export default class LikeController implements LikeControllerI {
     private static likeDao: LikeDao = LikeDao.getInstance();
     private static tuitDao: TuitDao = TuitDao.getInstance();
-    private static dislikeDao: DislikeDao = DislikeDao.getInstance();
     private static likeController: LikeController | null = null;
     /**
      * Creates singleton controller instance
@@ -44,7 +43,7 @@ export default class LikeController implements LikeControllerI {
             app.get("/api/users/:uid/likes", LikeController.likeController.findAllTuitsLikedByUser);
             app.get("/api/tuits/:tid/likes", LikeController.likeController.findAllUsersThatLikedTuit);
             app.put("/api/users/:uid/likes/:tid", LikeController.likeController.userTogglesTuitLikes);
-            app.get("/api/users/:uid/likes/:tid", LikeController.likeController.checkIfUserLikedTuit)
+            // app.get("/api/users/:uid/likes/:tid", LikeController.likeController.checkIfUserLikedTuit)
 
         }
         return LikeController.likeController;
@@ -52,25 +51,25 @@ export default class LikeController implements LikeControllerI {
 
     private constructor() { }
 
-    checkIfUserLikedTuit = async (req: Request, res: Response) => {
-        const likeDao = LikeController.likeDao;
-        const uid = req.params.uid;
-        const tid = req.params.tid;
-        // @ts-ignore
-        const profile = req.session['profile'];
-        const userId = uid === "me" && profile ?
-            profile._id : uid;
-        try {
-            const userAlreadyLikedTuit = await likeDao.checkIfUserLikedTuitNode(userId, tid);
-            if (userAlreadyLikedTuit) {
-                res.send({ status: "liked" })
-            } else {
-                res.send({ status: "notliked" })
-            }
-        } catch (e) {
-            res.sendStatus(404);
-        }
-    }
+    // checkIfUserLikedTuit = async (req: Request, res: Response) => {
+    //     const likeDao = LikeController.likeDao;
+    //     const uid = req.params.uid;
+    //     const tid = req.params.tid;
+    //     // @ts-ignore
+    //     const profile = req.session['profile'];
+    //     const userId = uid === "me" && profile ?
+    //         profile._id : uid;
+    //     try {
+    //         const userAlreadyLikedTuit = await likeDao.checkIfUserLikedTuitNode(userId, tid);
+    //         if (userAlreadyLikedTuit) {
+    //             res.send({ status: "liked" })
+    //         } else {
+    //             res.send({ status: "notliked" })
+    //         }
+    //     } catch (e) {
+    //         res.sendStatus(404);
+    //     }
+    // }
 
 
 
