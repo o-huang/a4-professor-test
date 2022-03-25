@@ -3,7 +3,6 @@
  */
 import { Express, Request, Response } from "express";
 import LikeDao from "../daos/LikeDao";
-import DislikeDao from "../daos/DislikeDao";
 import LikeControllerI from "../interfaces/LikeControllerI";
 import DislikeController from "./DislikeController";
 import TuitDao from "../daos/TuitDao";
