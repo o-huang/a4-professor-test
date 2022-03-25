@@ -1,10 +1,12 @@
 /**
  * @file Controller RESTful Web service API for likes resource
  */
-import {Express, Request, Response} from "express";
+import { Express, Request, Response } from "express";
 import LikeDao from "../daos/LikeDao";
 import LikeControllerI from "../interfaces/LikeControllerI";
 import TuitDao from "../daos/TuitDao";
+import { ParamsDictionary } from "express-serve-static-core";
+import { ParsedQs } from "qs";
 
 /**
  * @class TuitController Implements RESTful Web service API for likes resource.
@@ -34,16 +36,22 @@ export default class LikeController implements LikeControllerI {
      * @return TuitController
      */
     public static getInstance = (app: Express): LikeController => {
-        if(LikeController.likeController === null) {
+        if (LikeController.likeController === null) {
             LikeController.likeController = new LikeController();
             app.get("/api/users/:uid/likes", LikeController.likeController.findAllTuitsLikedByUser);
             app.get("/api/tuits/:tid/likes", LikeController.likeController.findAllUsersThatLikedTuit);
             app.put("/api/users/:uid/likes/:tid", LikeController.likeController.userTogglesTuitLikes);
+            app.get("/api/users/:uid/likes/:tid", LikeController.likeController.findUserLikesTuit)
+
         }
         return LikeController.likeController;
     }
 
-    private constructor() {}
+    private constructor() { }
+    findUserLikesTuit = (req: Request, res: Response) =>
+        LikeController.likeDao.findUserLikesTuit(req.params.tid, req.params.uid)
+            .then(likes => res.json(likes))
+
 
     /**
      * Retrieves all users that liked a tuit from the database
@@ -78,7 +86,7 @@ export default class LikeController implements LikeControllerI {
             });
     }
 
-    
+
     /**
      * @param {Request} req Represents request from client, including the
      * path parameters uid and tid representing the user that is liking the tuit
