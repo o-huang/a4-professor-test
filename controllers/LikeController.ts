@@ -48,10 +48,28 @@ export default class LikeController implements LikeControllerI {
     }
 
     private constructor() { }
+
+    checkIfUserLikedTuit= async (req: Request, res: Response) => {
+        const likeDao = LikeController.likeDao;
+        const uid = req.params.uid;
+        const tid = req.params.tid;
+        // @ts-ignore
+        const profile = req.session['profile'];
+        const userId = uid === "me" && profile ?
+            profile._id : uid;
+        try{
+            const userAlreadyLikedTuit = await likeDao.checkIfUserLikedTuitNode(userId, tid);
+            if (userAlreadyLikedTuit) {
+                res.sendStatus(200)
+            }else{
+                res.sendStatus(200)
+            }
+        }catch(e){
+            res.sendStatus(404);
+        }
+    }
     
-    checkIfUserLikedTuit = (req: Request, res: Response) =>
-        LikeController.likeDao.checkIfUserLikedTuit(req.params.tid, req.params.uid)
-            .then(status => res.send(status))
+
 
 
     /**
@@ -106,7 +124,7 @@ export default class LikeController implements LikeControllerI {
         const userId = uid === "me" && profile ?
             profile._id : uid;
         try {
-            const userAlreadyLikedTuit = await likeDao.checkIfUserLikedTuit(userId, tid);
+            const userAlreadyLikedTuit = await likeDao.checkIfUserLikedTuitNode(userId, tid);
             const howManyLikedTuit = await likeDao.countHowManyLikedTuit(tid);
             let tuit = await tuitDao.findTuitById(tid);
             if (userAlreadyLikedTuit) {
