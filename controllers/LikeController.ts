@@ -41,15 +41,15 @@ export default class LikeController implements LikeControllerI {
             app.get("/api/users/:uid/likes", LikeController.likeController.findAllTuitsLikedByUser);
             app.get("/api/tuits/:tid/likes", LikeController.likeController.findAllUsersThatLikedTuit);
             app.put("/api/users/:uid/likes/:tid", LikeController.likeController.userTogglesTuitLikes);
-            app.get("/api/users/:uid/likes/:tid", LikeController.likeController.findUserLikesTuit)
+            app.get("/api/users/:uid/likes/:tid", LikeController.likeController.checkIfUserLikedTuit)
 
         }
         return LikeController.likeController;
     }
 
     private constructor() { }
-    findUserLikesTuit = (req: Request, res: Response) =>
-        LikeController.likeDao.findUserLikesTuit(req.params.tid, req.params.uid)
+    checkIfUserLikedTuit = (req: Request, res: Response) =>
+        LikeController.likeDao.checkIfUserLikedTuit(req.params.tid, req.params.uid)
             .then(likes => res.json(likes))
 
 
@@ -105,7 +105,7 @@ export default class LikeController implements LikeControllerI {
         const userId = uid === "me" && profile ?
             profile._id : uid;
         try {
-            const userAlreadyLikedTuit = await likeDao.findUserLikesTuit(userId, tid);
+            const userAlreadyLikedTuit = await likeDao.checkIfUserLikedTuit(userId, tid);
             const howManyLikedTuit = await likeDao.countHowManyLikedTuit(tid);
             let tuit = await tuitDao.findTuitById(tid);
             if (userAlreadyLikedTuit) {
