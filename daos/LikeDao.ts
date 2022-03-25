@@ -11,11 +11,13 @@ export default class LikeDao implements LikeDaoI {
         return LikeDao.likeDao;
     }
     private constructor() { }
+
     findAllUsersThatLikedTuit = async (tid: string): Promise<Like[]> =>
         LikeModel
             .find({ tuit: tid })
             .populate("likedBy")
             .exec();
+
     findAllTuitsLikedByUser = async (uid: string): Promise<Like[]> =>
         LikeModel
             .find({ likedBy: uid })
@@ -25,18 +27,20 @@ export default class LikeDao implements LikeDaoI {
                     path: "postedBy"
                 }
             }).exec();
+
     userLikesTuit = async (uid: string, tid: string): Promise<any> =>
         LikeModel.create({ tuit: tid, likedBy: uid });
-    checkIfUserLikedTuitNode = async (uid: string, tid: string): Promise<any> =>
-        LikeModel.findOne({ tuit: tid, likedBy: uid });
+
     userUnlikesTuit = async (uid: string, tid: string): Promise<any> =>
         LikeModel.deleteOne({ tuit: tid, likedBy: uid });
+
     countHowManyLikedTuit = async (tid: string): Promise<any> =>
         LikeModel.count({ tuit: tid });
 
+    checkIfUserLikedTuitNode = async (uid: string, tid: string): Promise<any> =>
+        LikeModel.findOne({ tuit: tid, likedBy: uid });
 
-
-
+    //Checking for dislikes
     checkIfUserDislikedTuitNode = async (uid: string, tid: string): Promise<any> =>
         DislikeModel.findOne({ tuit: tid, likedBy: uid });
 
