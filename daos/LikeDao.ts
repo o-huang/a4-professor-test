@@ -1,5 +1,6 @@
 import LikeDaoI from "../interfaces/LikeDaoI";
 import LikeModel from "../mongoose/likes/LikeModel";
+import DislikeModel from "../mongoose/dislikes/DislikeModel";
 import Like from "../models/likes/Like";
 export default class LikeDao implements LikeDaoI {
     private static likeDao: LikeDao | null = null;
@@ -32,4 +33,14 @@ export default class LikeDao implements LikeDaoI {
         LikeModel.deleteOne({ tuit: tid, likedBy: uid });
     countHowManyLikedTuit = async (tid: string): Promise<any> =>
         LikeModel.count({ tuit: tid });
+
+
+
+
+    checkIfUserDislikedTuitNode = async (uid: string, tid: string): Promise<any> =>
+        DislikeModel.findOne({ tuit: tid, likedBy: uid });
+
+    userUnDislikesTuit = async (uid: string, tid: string): Promise<any> =>
+        DislikeModel.deleteOne({ tuit: tid, likedBy: uid });
+
 }

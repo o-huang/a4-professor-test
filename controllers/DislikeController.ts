@@ -7,7 +7,7 @@ import DislikeControllerI from "../interfaces/DislikeControllerI";
 import TuitDao from "../daos/TuitDao";
 import { ParamsDictionary } from "express-serve-static-core";
 import { ParsedQs } from "qs";
-
+import LikeDao from "../daos/LikeDao";
 export default class DislikeController implements DislikeControllerI {
 
 
@@ -51,4 +51,32 @@ export default class DislikeController implements DislikeControllerI {
                 res.json(tuitsFromDislikes);
             });
     }
+
+
+    // userTogglesTuitLikes = async (req: Request, res: Response) => {
+    //     const dislikeDao = DislikeController.dislikeDao;
+    //     const tuitDao = DislikeController.tuitDao;
+    //     const uid = req.params.uid;
+    //     const tid = req.params.tid;
+    //     // @ts-ignore
+    //     const profile = req.session['profile'];
+    //     const userId = uid === "me" && profile ?
+    //         profile._id : uid;
+    //     try {
+    //         const userAlreadyDislikedTuit = await dislikeDao.checkIfUserDislikedTuitNode(userId, tid);
+    //         const howManyLikedTuit = await dislikeDao.countHowManyDislikedTuit(tid);
+    //         let tuit = await tuitDao.findTuitById(tid);
+    //         if (userAlreadyDisikedTuit) {
+    //             await likeDao.userUnlikesTuit(userId, tid);
+    //             tuit.stats.likes = howManyLikedTuit - 1;
+    //         } else {
+    //             await LikeController.likeDao.userLikesTuit(userId, tid);
+    //             tuit.stats.likes = howManyLikedTuit + 1;
+    //         };
+    //         await tuitDao.updateLikes(tid, tuit.stats);
+    //         res.sendStatus(200);
+    //     } catch (e) {
+    //         res.sendStatus(404);
+    //     }
+    // }
 }
