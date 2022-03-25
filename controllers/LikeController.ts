@@ -60,9 +60,9 @@ export default class LikeController implements LikeControllerI {
         try{
             const userAlreadyLikedTuit = await likeDao.checkIfUserLikedTuitNode(userId, tid);
             if (userAlreadyLikedTuit) {
-                res.sendStatus(200)
+                res.send({status:"liked"})
             }else{
-                res.sendStatus(404)
+                res.send({status:"notliked"})
             }
         }catch(e){
             res.sendStatus(404);
