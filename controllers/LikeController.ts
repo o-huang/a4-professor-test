@@ -62,7 +62,7 @@ export default class LikeController implements LikeControllerI {
             if (userAlreadyLikedTuit) {
                 res.sendStatus(200)
             }else{
-                res.sendStatus(200)
+                res.sendStatus(404)
             }
         }catch(e){
             res.sendStatus(404);
