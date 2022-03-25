@@ -48,9 +48,10 @@ export default class LikeController implements LikeControllerI {
     }
 
     private constructor() { }
+    
     checkIfUserLikedTuit = (req: Request, res: Response) =>
         LikeController.likeDao.checkIfUserLikedTuit(req.params.tid, req.params.uid)
-            .then(likes => res.json(likes))
+            .then(status => res.send(status))
 
 
     /**
