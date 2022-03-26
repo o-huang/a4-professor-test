@@ -136,9 +136,8 @@ export default class LikeController implements LikeControllerI {
                 tuit.stats.likes = currentNumberOfTotalLikes - 1;
             } else if (userAlreadyDislikedTuit) {
                 await likeDao.userUnDislikesTuit(userId, tid)
-                tuit.stats.likes = currentNumberOfTotalLikes + 1;
                 await LikeController.likeDao.userLikesTuit(userId, tid);
-                tuit.stats.likes = currentNumberOfTotalLikes + 1;
+                tuit.stats.likes = currentNumberOfTotalLikes + 2;
             } else {
                 await LikeController.likeDao.userLikesTuit(userId, tid);
                 tuit.stats.likes = currentNumberOfTotalLikes + 1;
