@@ -49,7 +49,7 @@ let sess = {
     resave: true,
     proxy: true,
     cookie: {
-        secure: false,
+        secure: true,
         sameSite: 'none'
     }
 }
