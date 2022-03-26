@@ -119,8 +119,7 @@ export default class LikeController implements LikeControllerI {
         const tuitDao = LikeController.tuitDao;
         const uid = req.params.uid;
         const tid = req.params.tid;
-        console.log(uid)
-        console.log(tid)
+    
         // @ts-ignore
         const profile = req.session['profile'];
         const userId = uid === "me" && profile ?
