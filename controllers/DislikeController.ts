@@ -58,7 +58,7 @@ export default class DislikeController implements DislikeControllerI {
         const tuitDao = DislikeController.tuitDao;
         const uid = req.params.uid;
         const tid = req.params.tid;
-     
+
         // @ts-ignore
         const profile = req.session['profile'];
         const userId = uid === "me" && profile ?
@@ -66,21 +66,22 @@ export default class DislikeController implements DislikeControllerI {
         try {
             const userAlreadyLikedTuit = await dislikeDao.checkIfUserLikedTuitNode(userId, tid);
             const userAlreadyDislikedTuit = await dislikeDao.checkIfUserDislikedTuitNode(userId, tid);
-            const howManyLikedTuit = await dislikeDao.countHowManyDislikedTuit(tid);
-    
+            const howManyLikedTuit = await dislikeDao.countHowManyLikedTuit(tid);
+            const howManyDislikedTuit = await dislikeDao.countHowManyDislikedTuit(tid);
+            const currentNumberOfTotalLikes = howManyLikedTuit - howManyDislikedTuit
             let tuit = await tuitDao.findTuitById(tid);
-         
+
             if (userAlreadyDislikedTuit) {
                 await dislikeDao.userUnDislikesTuit(userId, tid);
-                tuit.stats.likes = howManyLikedTuit + 1;
+                tuit.stats.likes = currentNumberOfTotalLikes + 1;
             } else if (userAlreadyLikedTuit) {
                 await dislikeDao.userUnlikesTuit(userId, tid)
-                tuit.stats.likes = howManyLikedTuit - 1;
+                tuit.stats.likes = currentNumberOfTotalLikes - 1;
                 await DislikeController.dislikeDao.userDislikesTuit(userId, tid)
-                tuit.stats.likes = howManyLikedTuit - 1;
+                tuit.stats.likes = currentNumberOfTotalLikes - 1;
             } else {
                 await DislikeController.dislikeDao.userDislikesTuit(userId, tid);
-                tuit.stats.likes = howManyLikedTuit - 1;
+                tuit.stats.likes = currentNumberOfTotalLikes - 1;
             };
             await tuitDao.updateLikes(tid, tuit.stats);
             res.sendStatus(200);
