@@ -36,7 +36,7 @@ export default class DislikeDao implements DislikeDaoI {
         DislikeModel.deleteOne({ tuit: tid, dislikedBy: uid });
 
     countHowManyDislikedTuit = async (tid: string): Promise<any> =>
-        DislikeModel.count({ tuit: tid });
+        LikeModel.count({ tuit: tid });
 
     checkIfUserDislikedTuitNode = async (uid: string, tid: string): Promise<any> =>
         DislikeModel.findOne({ tuit: tid, dislikedBy: uid });
