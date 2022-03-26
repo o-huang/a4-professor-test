@@ -58,6 +58,8 @@ export default class DislikeController implements DislikeControllerI {
         const tuitDao = DislikeController.tuitDao;
         const uid = req.params.uid;
         const tid = req.params.tid;
+        console.log(uid)
+        console.log(tid)
         // @ts-ignore
         const profile = req.session['profile'];
         const userId = uid === "me" && profile ?
@@ -66,6 +68,7 @@ export default class DislikeController implements DislikeControllerI {
             const userAlreadyLikedTuit = await dislikeDao.checkIfUserLikedTuitNode(userId, tid);
             const userAlreadyDislikedTuit = await dislikeDao.checkIfUserDislikedTuitNode(userId, tid);
             const howManyLikedTuit = await dislikeDao.countHowManyDislikedTuit(tid);
+         
             let tuit = await tuitDao.findTuitById(tid);
             if (userAlreadyDislikedTuit) {
                 await dislikeDao.userUnDislikesTuit(userId, tid);
