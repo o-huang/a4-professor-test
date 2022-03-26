@@ -64,24 +64,24 @@ export default class DislikeController implements DislikeControllerI {
         const userId = uid === "me" && profile ?
             profile._id : uid;
         try {
-            // const userAlreadyLikedTuit = await dislikeDao.checkIfUserLikedTuitNode(userId, tid);
-            // const userAlreadyDislikedTuit = await dislikeDao.checkIfUserDislikedTuitNode(userId, tid);
-            // const howManyLikedTuit = await dislikeDao.countHowManyDislikedTuit(tid);
+            const userAlreadyLikedTuit = await dislikeDao.checkIfUserLikedTuitNode(userId, tid);
+            const userAlreadyDislikedTuit = await dislikeDao.checkIfUserDislikedTuitNode(userId, tid);
+            const howManyLikedTuit = await dislikeDao.countHowManyDislikedTuit(tid);
     
             let tuit = await tuitDao.findTuitById(tid);
-            tuit.stats.likes = 10
-            // if (userAlreadyDislikedTuit) {
-            //     await dislikeDao.userUnDislikesTuit(userId, tid);
-            //     tuit.stats.likes = howManyLikedTuit + 1;
-            // } else if (userAlreadyLikedTuit) {
-            //     await dislikeDao.userUnlikesTuit(userId, tid)
-            //     tuit.stats.likes = howManyLikedTuit - 1;
-            //     await DislikeController.dislikeDao.userDislikesTuit(userId, tid)
-            //     tuit.stats.likes = howManyLikedTuit - 1;
-            // } else {
-            //     await DislikeController.dislikeDao.userDislikesTuit(userId, tid);
-            //     tuit.stats.likes = howManyLikedTuit - 1;
-            // };
+         
+            if (userAlreadyDislikedTuit) {
+                await dislikeDao.userUnDislikesTuit(userId, tid);
+                tuit.stats.likes = howManyLikedTuit + 1;
+            } else if (userAlreadyLikedTuit) {
+                await dislikeDao.userUnlikesTuit(userId, tid)
+                tuit.stats.likes = howManyLikedTuit - 1;
+                await DislikeController.dislikeDao.userDislikesTuit(userId, tid)
+                tuit.stats.likes = howManyLikedTuit - 1;
+            } else {
+                await DislikeController.dislikeDao.userDislikesTuit(userId, tid);
+                tuit.stats.likes = howManyLikedTuit - 1;
+            };
             await tuitDao.updateLikes(tid, tuit.stats);
             res.sendStatus(200);
         } catch (e) {
