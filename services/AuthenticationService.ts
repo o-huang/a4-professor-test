@@ -1,3 +1,6 @@
+/**
+ * @file Authentication service for using to authenticate user
+ */
 import UserDao from "../daos/UserDao";
 import mongoose from "mongoose";
 
