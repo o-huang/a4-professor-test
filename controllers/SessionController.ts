@@ -1,4 +1,4 @@
-import {Request, Response, Express} from "express";
+import { Request, Response, Express } from "express";
 
 const SessionController = (app: Express) => {
     const setSession = (req: Request, res: Response) => {
@@ -24,7 +24,7 @@ const SessionController = (app: Express) => {
         req.session.destroy();
         res.send(200);
     }
-    
+
     app.get('/api/session/set/:name/:value',
         setSession);
     app.get('/api/session/get/:name',

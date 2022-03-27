@@ -3,7 +3,7 @@
  */
 
 import CourseControllerI from "../interfaces/CourseController";
-import {Express, Request, Response} from "express";
+import { Express, Request, Response } from "express";
 import CourseDao from "../daos/CourseDao";
 import Course from "../models/Course";
 

@@ -1,4 +1,4 @@
-import {Schema, Types} from "mongoose";
+import { Schema, Types } from "mongoose";
 
 export default interface Section {
     name: string;

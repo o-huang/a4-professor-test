@@ -1,3 +1,4 @@
+
 /**
  * @file Implements an Express Node HTTP server. Declares RESTful Web services
  * enabling CRUD operations on the following resources:
@@ -5,6 +6,10 @@
  *     <li>users</li>
  *     <li>tuits</li>
  *     <li>likes</li>
+ *     <li>dislikes</li>
+ *     <li>follows</li>
+ *     <li>message</li>
+ *     <li>bookmark</li>
  * </ul>
  * 
  * Connects to a remote MongoDB instance hosted on the Atlas cloud database
@@ -24,16 +29,6 @@ import GroupController from "./controllers/GroupController";
 const cors = require("cors");
 const session = require("express-session");
 
-// build the connection string
-const PROTOCOL = "mongodb+srv";
-const DB_USERNAME = process.env.DB_USERNAME;
-const DB_PASSWORD = process.env.DB_PASSWORD;
-const HOST = "cluster0.m8jeh.mongodb.net";
-const DB_NAME = "myFirstDatabase";
-const DB_QUERY = "retryWrites=true&w=majority";
-// const connectionString = `${PROTOCOL}://${DB_USERNAME}:${DB_PASSWORD}@${HOST}/${DB_NAME}?${DB_QUERY}`;// connect to the database
-const connectionString = `${PROTOCOL}://${DB_USERNAME}:${DB_PASSWORD}@${HOST}/${DB_NAME}?${DB_QUERY}`;// connect to the database
-// mongoose.connect(connectionString);
 mongoose.connect("mongodb+srv://frostyfeet1998:cs5500password@cluster0.x1wvq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
 
 const app = express();

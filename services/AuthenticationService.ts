@@ -3,16 +3,6 @@ import mongoose from "mongoose";
 
 const userDao: UserDao = UserDao.getInstance();
 
-const PROTOCOL = "mongodb+srv";
-const DB_USERNAME = "giuseppi";//process.env.DB_USERNAME;
-const DB_PASSWORD = "supersecretpassword";//process.env.DB_PASSWORD;
-const HOST = "cluster0.m8jeh.mongodb.net";
-const DB_NAME = "myFirstDatabase";
-const DB_QUERY = "retryWrites=true&w=majority";
-const connectionString = `${PROTOCOL}://${DB_USERNAME}:${DB_PASSWORD}@${HOST}/${DB_NAME}?${DB_QUERY}`;
-// connect to the database
-// mongoose.connect(connectionString);
-
 mongoose.connect("mongodb+srv://frostyfeet1998:cs5500password@cluster0.x1wvq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
 export const login = (u: string, p: string) =>
   userDao.findUserByCredentials(u, p)

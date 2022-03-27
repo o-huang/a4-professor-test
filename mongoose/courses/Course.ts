@@ -1,4 +1,4 @@
-import {ObjectId, Types} from "mongoose";
+import { ObjectId, Types } from "mongoose";
 
 export default interface Course {
     _id?: ObjectId

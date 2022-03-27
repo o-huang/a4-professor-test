@@ -1,7 +1,9 @@
 // import Course from "../mongoose/courses/Course";
 // import Course from "../models/Course";
 import Course from "../mongoose/courses/Course";
-
+/**
+ * @file Declares API for course related data access object methods
+ */
 export default interface CourseDao {
     findAllCourses(): Promise<Course[]>;
     findAllCoursesDeep(): Promise<Course[]>;

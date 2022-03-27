@@ -1,4 +1,4 @@
-import {Express, Request, Response} from "express";
+import { Express, Request, Response } from "express";
 import * as dao from "../daos/GroupDao";
 
 const GroupController = (app: Express) => {
@@ -29,7 +29,7 @@ const GroupController = (app: Express) => {
     const findGroupsForUser = (req: Request, res: Response) =>
         dao.findGroupsForUser(req.params.uid)
             .then(groups => res.json(groups));
-    
+
     app.get('/api/groups', findAllGroups);
     app.get('/api/groups/:gid', findGroupById);
     app.get('/api/groups/name/:name', findGroupByName);

@@ -1,4 +1,4 @@
-import mongoose, {Schema} from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import Section from "./Section";
 const SectionSchema = new mongoose.Schema<Section>({
     name: String,
@@ -6,6 +6,6 @@ const SectionSchema = new mongoose.Schema<Section>({
     room: String,
     startTime: Number,
     duration: Number,
-    course: {type: Schema.Types.ObjectId, ref: "CourseModel"}
-}, {collection: "sections"});
+    course: { type: Schema.Types.ObjectId, ref: "CourseModel" }
+}, { collection: "sections" });
 export default SectionSchema;

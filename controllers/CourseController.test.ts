@@ -14,12 +14,11 @@ describe('findAllCourses Controller', () => {
 
     test('findAllCourses Controller', () => {
         const courseResponse = [
-            {title: 'cs5500'},
-            {title: 'cs5610'},
+            { title: 'cs5500' },
+            { title: 'cs5610' },
         ];
         // axios.get.mockResolvedValue(courseResponse);
         //
         // return courseController.findAllCourses().then(data => expect(data).toEqual(users));
     });
 });
-    

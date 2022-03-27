@@ -4,15 +4,15 @@ import SectionModel from "../mongoose/sections/SectionModel";
 
 export default class SectionDao implements SectionDaoI {
     static instance: SectionDao = new SectionDao();
-    private constructor() {}
+    private constructor() { }
     static getInstance(): SectionDao {
         return this.instance;
     }
     async createSectionForCourse(cid: string, section: Section): Promise<Section> {
-        return await SectionModel.create({...section, course: cid});
+        return await SectionModel.create({ ...section, course: cid });
     }
     async deleteSection(sid: string): Promise<any> {
-        return await SectionModel.remove({_id: sid});
+        return await SectionModel.remove({ _id: sid });
     }
     async findSectionById(sid: string): Promise<any> {
         return await SectionModel.findById(sid);
@@ -33,17 +33,17 @@ export default class SectionDao implements SectionDaoI {
             .exec();
     }
     async findAllSectionsForCourse(cid: string): Promise<Section[]> {
-        return await SectionModel.find({course: cid});
+        return await SectionModel.find({ course: cid });
     }
     async findAllSectionsForCourseDeep(cid: string): Promise<Section[]> {
         return await SectionModel
-            .find({course: cid})
+            .find({ course: cid })
             .populate("course")
             .exec();
     }
     async updateSection(sid: string, section: Section): Promise<any> {
         return await SectionModel.updateOne(
-            {_id: sid},
-            {$set: section});
+            { _id: sid },
+            { $set: section });
     }
 }

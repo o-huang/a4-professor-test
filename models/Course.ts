@@ -1,21 +1,11 @@
 /**
  * @file Course data model
  */
-import {Schema, Types} from "mongoose";
+import { Schema, Types } from "mongoose";
 
 export default class Course {
-    // private title: string = '';
-    // private syllabus: string = '';
-    // private credits: number = 0;
-    // private sections: Types.ObjectId[] = [];
-    //
-    // public setTitle(title: string) : void {
-    //     this.title = title;
-    // }
-    // public getTitle() : string {
-    //     return this.title;
-    // }
-    
+
+
     private _title: string = '';
     private _syllabus: string = '';
     private _credits: number = 0;

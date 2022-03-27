@@ -21,5 +21,5 @@ const CourseSchema = new mongoose.Schema<Course>({
         type: mongoose.Schema.Types.ObjectId,
         ref: "SectionModel"
     }]
-}, {collection: "courses"});
+}, { collection: "courses" });
 export default CourseSchema;
