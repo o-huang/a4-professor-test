@@ -49,7 +49,13 @@ export default class DislikeController implements DislikeControllerI {
     }
 
     private constructor() { }
-
+    /**
+   * Checks if user disliked a tuit
+   * @param {Request} req Represents request from client, including the path
+   * parameter tid representing the disliked tuit
+   * @param {Response} res Represents response to client, including the
+   * body formatted as JSON arrays containing the user objects
+   */
     checkIfUserDislikedTuit = async (req: Request, res: Response) => {
         const dislikeDao = DislikeController.dislikeDao;
         const uid = req.params.uid;

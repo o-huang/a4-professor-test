@@ -48,7 +48,13 @@ export default class LikeController implements LikeControllerI {
     }
 
     private constructor() { }
-
+    /**
+    * Checks if user liked a tuit
+    * @param {Request} req Represents request from client, including the path
+    * parameter tid representing the disliked tuit
+    * @param {Response} res Represents response to client, including the
+    * body formatted as JSON arrays containing the user objects
+    */
     checkIfUserLikedTuit = async (req: Request, res: Response) => {
         const likeDao = LikeController.likeDao;
         const uid = req.params.uid;
