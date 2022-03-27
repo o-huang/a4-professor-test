@@ -53,8 +53,6 @@ export default class CourseDao implements CourseDaoI {
         return CourseModel.updateOne(
             { _id: cid },
             { $push: { sections: new mongoose.Types.ObjectId(sid) } });
-        // course.sections.push(new mongoose.Types.ObjectId(sid));
-        // return await this.updateCourse(cid, course);
     }
 
     removeSectionFromCourse(cid: string, sid: string): Promise<any> {

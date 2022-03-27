@@ -1,3 +1,7 @@
+/**
+ * @file Implements DAO managing data storage of sections. Uses mongoose SectionModel
+ * to integrate with MongoDB
+ */
 import SectionDaoI from "../interfaces/SectionDao";
 import Section from "../mongoose/sections/Section";
 import SectionModel from "../mongoose/sections/SectionModel";

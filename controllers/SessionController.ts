@@ -1,3 +1,6 @@
+/**
+ * @file SessionController
+ */
 import { Request, Response, Express } from "express";
 
 const SessionController = (app: Express) => {

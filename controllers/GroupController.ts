@@ -1,3 +1,6 @@
+/**
+ * @file Group controller
+ */
 import { Express, Request, Response } from "express";
 import * as dao from "../daos/GroupDao";
 

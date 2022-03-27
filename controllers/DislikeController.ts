@@ -8,6 +8,23 @@ import TuitDao from "../daos/TuitDao";
 import { ParamsDictionary } from "express-serve-static-core";
 import { ParsedQs } from "qs";
 import LikeDao from "../daos/LikeDao";
+
+
+/**
+ * @class TuitController Implements RESTful Web service API for dislikes resource.
+ * Defines the following HTTP endpoints:
+ * <ul>
+ *     <li>GET /api/users/:uid/dislikes to retrieve all the tuits liked by a user
+ *     </li>
+ *     <li>GET /api/tuits/:tid/dislikes to retrieve all users that liked a tuit
+ *     </li>
+ *     <li>POST /api/users/:uid/dislikes/:tid to record that a user likes a tuit
+ *     </li>
+ * </ul>
+ * @property {DisikeDao} dislikeDao Singleton DAO implementing dislikes CRUD operations
+ * @property {DislikeController} DislikeController Singleton controller implementing
+ * RESTful Web service API
+ */
 export default class DislikeController implements DislikeControllerI {
 
 
@@ -31,12 +48,24 @@ export default class DislikeController implements DislikeControllerI {
     }
 
     private constructor() { }
-
+    /**
+    * Retrieves all users that disliked a tuit from the database
+    * @param {Request} req Represents request from client, including the path
+    * parameter tid representing the disliked tuit
+    * @param {Response} res Represents response to client, including the
+    * body formatted as JSON arrays containing the user objects
+    */
     findAllUsersThatDislikedTuit = (req: Request, res: Response) =>
         DislikeController.dislikeDao.findAllUsersThatDislikedTuit(req.params.tid)
             .then(dislikes => res.json(dislikes));
 
-
+    /**
+     * Retrieves all tuits disliked by a user from the database
+     * @param {Request} req Represents request from client, including the path
+     * parameter uid representing the user disliked the tuits
+     * @param {Response} res Represents response to client, including the
+     * body formatted as JSON arrays containing the tuit objects that were disliked
+     */
     findAllTuitsDislikedByUser = (req: Request, res: Response) => {
         const uid = req.params.uid;
         // @ts-ignore
@@ -52,7 +81,14 @@ export default class DislikeController implements DislikeControllerI {
             });
     }
 
-
+    /**
+     * @param {Request} req Represents request from client, including the
+     * path parameters uid and tid representing the user that is disliking the tuit
+     * and the tuit being disliked
+     * @param {Response} res Represents response to client, including the
+     * body formatted as JSON containing the new likes that was inserted in the
+     * database
+     */
     userTogglesTuitDislikes = async (req: Request, res: Response) => {
         const dislikeDao = DislikeController.dislikeDao;
         const tuitDao = DislikeController.tuitDao;

@@ -1,3 +1,6 @@
+/**
+ * @file Authentication controller for using to authenticate user
+ */
 import { Request, Response, Express } from "express";
 import UserDao from "../daos/UserDao";
 const bcrypt = require('bcrypt');
