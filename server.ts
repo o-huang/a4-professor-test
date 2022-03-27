@@ -23,7 +23,6 @@ import DislikeController from "./controllers/DislikeController";
 import SessionController from "./controllers/SessionController";
 import AuthenticationController from "./controllers/AuthenticationController";
 import mongoose from "mongoose";
-import GroupController from "./controllers/GroupController";
 const cors = require("cors");
 const session = require("express-session");
 
@@ -69,7 +68,6 @@ const likesController = LikeController.getInstance(app);
 const dislikesController = DislikeController.getInstance(app);
 SessionController(app);
 AuthenticationController(app);
-GroupController(app);
 /**
  * Start a server listening at port 4000 locally
  * but use environment variable PORT on Heroku if available.
