@@ -61,9 +61,14 @@ const AuthenticationController = (app: Express) => {
     }
 
     const logout = (req: Request, res: Response) => {
+
         // @ts-ignore
+
+
         req.session.destroy();
         res.sendStatus(200);
+
+
     }
 
     app.post("/api/auth/login", login);
