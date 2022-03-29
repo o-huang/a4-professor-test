@@ -44,22 +44,13 @@ export default class DislikeController implements DislikeControllerI {
             app.get("/api/tuits/:tid/dislikes", DislikeController.dislikeController.findAllUsersThatDislikedTuit);
             app.put("/api/users/:uid/dislikes/:tid", DislikeController.dislikeController.userTogglesTuitDislikes);
             app.get("/api/users/:uid/dislikes/:tid", DislikeController.dislikeController.checkIfUserDislikedTuit);
-            app.delete("/api/users/:uid/dislikes/:tid", DislikeController.dislikeController.userUnDislikesTuit);
+         
         }
         return DislikeController.dislikeController;
     }
 
     private constructor() { }
-    /**
-    * User dislikes a tuit
-    * @param {Request} req Represents request from client, including the path
-    * parameter tid representing the disliked tuit
-    * @param {Response} res Represents response to client, including the
-    * body formatted as JSON arrays containing the user objects
-    */
-    userUnDislikesTuit = (req: Request, res: Response) =>
-        DislikeController.dislikeDao.userUnDislikesTuit(req.params.uid, req.params.tid)
-            .then((status) => res.send(status));
+
 
 
     /**
