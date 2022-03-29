@@ -52,7 +52,9 @@ const AuthenticationController = (app: Express) => {
 
     const profile = (req: Request, res: Response) => {
         // @ts-ignore
+     
         const profile = req.session['profile'];
+        
         if (profile) {
             res.json(profile);
         } else {
